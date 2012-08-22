@@ -5,7 +5,12 @@
 
 var express = require('express')
   , http = require('http')
-  , url = require('url');
+  , mongoose = require('mongoose');
+
+var db = mongoose.createConnection('10.54.38.146', 'submit_jobs');
+
+var schema = new mongoose.Schema({payload:'string', jobid:'string'});
+var Jobs = db.model('Jobs', schema);
 
 var app = express();
 
@@ -21,6 +26,11 @@ app.configure('development', function(){
 });
 
 app.post('/gridvid', function(req, res) {  
+  var newJob = new Jobs();
+  newJob.payload = JSON.stringify(req.body);
+  newJob.jobid = newJob._id;
+  newJob.save();
+  
   res.end();
 });
 
