@@ -7,7 +7,7 @@ var express = require('express')
   , http = require('http')
   , mongoose = require('mongoose');
 
-var db = mongoose.createConnection('10.54.38.146', 'submit_jobs');
+var db = mongoose.createConnection('DB Host', 'DB Name');
 
 var schema = new mongoose.Schema({payload:'string', jobid:'string'});
 var Jobs = db.model('Jobs', schema);
